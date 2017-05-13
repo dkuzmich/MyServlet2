@@ -1,18 +1,19 @@
 <%--
   Created by IntelliJ IDEA.
   User: dkuzmich
-  Date: 19.04.2017
-  Time: 14:02
+  Date: 5/12/2017
+  Time: 5:24 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Devcolibri.com</title>
+    <title>Login Failed</title>
 </head>
 <body>
-<h1>You login successful! </h1>
-<h1>Hello ${user}</h1>>
+Your login failed please check your credential and try again
+<br>
 <a href="login.jsp">Loin page</a>
+
 </body>
 </html>

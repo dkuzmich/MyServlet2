@@ -10,14 +10,23 @@ import java.io.IOException;
  */
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
-    @Override
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       req.setAttribute("name","Dimas");
-       req.getRequestDispatcher("MyJSP.jsp").forward(req,resp);
+        req.getRequestDispatcher("login.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String logUser=req.getParameter("user");
+        String logPass=req.getParameter("pwd");
+        String pass = "Dima";
+        String username = "Dima";
+        if (username.equals(logUser)&& pass.equals(logPass)){
+            req.setAttribute( "user", "logUser");
+            req.getRequestDispatcher("MyJSP.jsp").forward(req,resp);
+        }else
+        {
+            resp.sendRedirect("FailLogin.jsp");
+        }
     }
 }
