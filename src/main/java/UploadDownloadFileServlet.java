@@ -16,6 +16,8 @@ import java.io.IOException;
                  maxFileSize = 1024*1024*10,
                  maxRequestSize = 1024*1024*10)
 public class UploadDownloadFileServlet extends HttpServlet {
+
+    public String FilePatch=null;
     public static final String Upload_DIR="uploads";
 
     @Override
@@ -31,32 +33,43 @@ public class UploadDownloadFileServlet extends HttpServlet {
         if (!filesaveDir.exists()) {
             filesaveDir.mkdirs();
         }
+
         System.out.println("Upload file Dir = " + filesaveDir.getAbsolutePath());
+        FilePatch=filesaveDir.getAbsolutePath();
 
         String fileName = null;
         // Get all parts from request and write it to the file on server
         for (Part part : req.getParts()) {
-            fileName = part.getName();
-            part.write(uploadFilepath + File.separator + fileName);
+          //  fileName = part.getName();
+           fileName=extractFileName(part);
+           fileName=new File(fileName).getName();
+           part.write(FilePatch+File.separator+fileName);
+
+
         }
-        req.setAttribute("message", fileName + "File uploaded successfully");
+
+        req.setAttribute("message", fileName + " - File uploaded successfully");
+
+        req.setAttribute("mFileInfo",FilePatch + File.separator+fileName  );
+
+
+
         getServletContext().getRequestDispatcher("/MyJSP.jsp").forward(req, resp);
+    }
+    private String extractFileName(Part part){
+        String contentDisp=part.getHeader("content-disposition");
+        String[] items=contentDisp.split(";");
+        for(String s: items){
+            if(s.trim().startsWith("filename")){
+                return s.substring(s.indexOf("=")+2,s.length()-1);
+            }
+        }
+        return "";
     }
 /**
  * Utility method to get file name from HTTP header content-disposition
  */
-        private String getFileName(Part part){
 
-                String contentDisp=part.getHeader("content-disposition");
-            System.out.println("content-disposition header= "+contentDisp);
-            String [] tokens=contentDisp.split(":");
-            for (String token: tokens){
-                if (token.trim().startsWith("filename")){
-                    return token.substring(token.indexOf("=")+2,token.length()-1);
-                }
-            }
-        return "";
-    }
 
     }
 

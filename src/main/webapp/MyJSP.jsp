@@ -33,8 +33,9 @@
     }
 %>
 
-<h3> Hi <%=userName %>, Login Successful. You session ID=<%=sessionID %></h3>
-
+<h3> Hi <%=userName %>, Login Successful.</h3>
+You session ID=<%=sessionID %>
+<br>
 
 
 <form action="UploadDownloadFileServlet" method="post" enctype="multipart/form-data">
@@ -43,15 +44,29 @@
     <input type="submit" value="Upload">
 </form>
 
+<br>
+
 <h2>Upload File Response</h2>
 <h2>${requestScope.message}</h2>
+<h2>${requestScope.mFileInfo}</h2>
+<a href=${requestScope.mFileInfo} > Download File</a>
+<br>
 
+<br>
 <a href="login.jsp">BACK to Login page</a>
 <br>
-Please LogOut after work
+<br>
+Read info from Table:
+<form action="ReadDataFromDB" method="post">
+    <input type="submit" value="ReadFromDB">
+    <br>
+</form>
+<br>
+<br>
+    Please LogOut after work
 <form action="LogoutServlet" method="post">
  <input type="submit" value="Logout">
-
 </form>
+
 </body>
 </html>

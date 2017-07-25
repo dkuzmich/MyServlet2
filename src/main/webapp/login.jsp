@@ -17,6 +17,9 @@
     Password: <input type="password" name="pwd">
     <br>
     <input type="submit" value="Login">
+    <br>
+
+    If you are new user, please <a href="register.jsp">Register</a>
 
 </form>
 
