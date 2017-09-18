@@ -1,20 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: dkuzmich
-  Date: 19.04.2017
-  Time: 14:02
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
+
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Devcolibri.com</title>
+    <title>Dimas.com</title>
 </head>
 <body>
 <h1>You login successful! </h1>
 
 <h1>Hello ${user}</h1>>
 <%
+
     String user=null;
     if(session.getAttribute("user")==null){
         response.sendRedirect("login.jsp");
@@ -52,21 +50,39 @@ You session ID=<%=sessionID %>
 <a href=${requestScope.mFileInfo} > Download File</a>
 <br>
 
+
+
 <br>
-<a href="login.jsp">BACK to Login page</a>
-<br>
-<br>
+
 Read info from Table:
 <form action="ReadDataFromDB" method="post">
     <input type="submit" value="ReadFromDB">
     <br>
 </form>
 <br>
+
+<br>
+
+<h3>Reguister new user</h3>
+<form action="RegisterUser" method="post">
+    <strong>Email </strong>:<input type="text" name="Remail"><br>
+    <strong>Password</strong>:<input type="password" name="Rpassword">
+    <strong>Name</strong>:<input type="text" name="Rname"><br>
+    <strong>Country</strong>:<input type="text" name="Rcountry"><br>
+    <input type="submit" value="Register">
+
+</form>
+
+<br>
 <br>
     Please LogOut after work
 <form action="LogoutServlet" method="post">
  <input type="submit" value="Logout">
 </form>
+
+<br>
+<a href="login.jsp">BACK to Login page</a>
+<br>
 
 </body>
 </html>

@@ -1,4 +1,6 @@
+package dimas.com;
 import java.io.Serializable;
+
 
 /**
  * Created by dkuzmich on 6/21/2017.
@@ -10,6 +12,10 @@ public class User implements Serializable {
     private int id;
     private String country;
     private String pass;
+
+    public User(){
+
+    }
 
     public User(String nm, String em, String country, String pass){
         this.name=nm;
@@ -51,6 +57,13 @@ public class User implements Serializable {
         this.country = country;
     }
 
+    public void setPass(String pass)
+    {
+        this.pass=pass;
+    }
+    public String getPass(){
+        return pass;
+    }
     @Override
     public String toString() {
         return  "name=" + this.name + ", email=" + this.email +", country=" + country ;

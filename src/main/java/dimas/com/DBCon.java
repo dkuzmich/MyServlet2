@@ -1,7 +1,10 @@
+package dimas.com;
+
 import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.sql.*;
 import java.util.ArrayList;
+import dimas.com.*;
 
 import static java.sql.DriverManager.*;
 
@@ -62,14 +65,64 @@ public class DBCon {
     public void getUsetListfromDB(){
         int userListSize=userList.size();
 
+
+
         for(int i=0;i<userListSize;i++){
             System.out.println(userList.get(i).toString());
         }
     }
 
+    public ArrayList getUsetListfromDBinListFormat(){
+       return  userList;
+        }
 
+
+public String checkIfExistUserInDB(String tuser, String tEmail) {
+    String SqlStatement = "SELECT name, email From users";
+
+    if (statement == null) {
+        dbConnection();
+
+    }
+        try {
+            ResultSet resultSet = statement.executeQuery(SqlStatement);
+
+            while (resultSet.next()) {
+                if (tuser == resultSet.getString("name")) {
+                    return "bad name";
+                }
+                if (tEmail == resultSet.getString("email")) {
+                    return "bad mail";
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "ok";
+    }
+
+    public void addRegisteredUserToDB(String name,String email, String country, String password){
+        String SqlStatementAddUserToDb ="INSERT INTO users (name, email, country, password) VALUES (name,email,country,password) ";
+        if (statement == null) {
+            dbConnection();
+        }
+            try {
+                ResultSet resultSet = statement.executeQuery(SqlStatementAddUserToDb);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        System.out.println("Data is added to DB");
+
+    }
 
 }
+
+
+
+
+
+
 
 
 
